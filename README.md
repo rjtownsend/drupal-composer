@@ -1,48 +1,46 @@
-# Composer template for Drupal projects
-
-[![CI](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml/badge.svg?branch=9.x)](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml)
+# Composer template for Drupal + ddev
 
 This project template provides a starter kit for managing your site
-dependencies with [Composer](https://getcomposer.org/).
+dependencies with [Composer](https://getcomposer.org/). It is forked from the 
+[Drupal Composer](https://github.com/drupal-composer/drupal-project) 
+project with some minor tweaks to work better with [DDEV](https://ddev.com/)
+and installs several contrib modules I use on most projects. 
 
 ## Usage
 
-First you need to [install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
+1. [install Git](https://github.com/git-guides/install-git)
+2. [Install Docker](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/)
+3. [Install DDEV](https://ddev.readthedocs.io/en/stable/)
+4. `git clone git@github.com:rjtownsend/drupal-composer.git`
+5. cd into installation directory, run `ddev config`, and configure as follows:
+    * Project name: must be lower case, no underscores, hyphens allowed. This will also be the 
+URL where the site is located; eg. my-project will be located at https://my-project.ddev.site
+    * Project root: `docroot`
+    * Project type: `drupal9`
+6. Run `ddev start` and then `ddev composer install`
 
-> Note: The instructions below refer to the [global Composer installation](https://getcomposer.org/doc/00-intro.md#globally).
-You might need to replace `composer` with `php composer.phar` (or similar)
-for your setup.
+## Useful DDEV commands
 
-After that you can create the project:
+* `ddev auth ssh` loads all your local ssh keys into DDEV
+* `ddev npm install` does what you would think
+* `ddev npm exec gulp` also does what you would think
+* `ddev import-db < ./local_DATE.sql.gz` and `ddev export-db > ./local_DATE.sql.gz`
+* `ddev drush [command]`
+* `ddev composer [command`
 
-```
-composer create-project drupal-composer/drupal-project:9.x-dev some-dir --no-interaction
-```
-
-With `composer require ...` you can download new dependencies to your
-installation.
-
-```
-cd some-dir
-composer require drupal/devel
-```
-
-The `composer create-project` command passes ownership of all files to the
-project that is created. You should create a new Git repository, and commit
-all files not excluded by the `.gitignore` file.
 
 ## What does the template do?
 
 When installing the given `composer.json` some tasks are taken care of:
 
-* Drupal will be installed in the `web`-directory.
+* Drupal will be installed in the `docroot`-directory.
 * Autoloader is implemented to use the generated composer autoloader in `vendor/autoload.php`,
-  instead of the one provided by Drupal (`web/vendor/autoload.php`).
-* Modules (packages of type `drupal-module`) will be placed in `web/modules/contrib/`
-* Theme (packages of type `drupal-theme`) will be placed in `web/themes/contrib/`
-* Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/contrib/`
+  instead of the one provided by Drupal (`docroot/vendor/autoload.php`).
+* Modules (packages of type `drupal-module`) will be placed in `docroot/modules/contrib/`
+* Theme (packages of type `drupal-theme`) will be placed in `docroot/themes/contrib/`
+* Profiles (packages of type `drupal-profile`) will be placed in `docroot/profiles/contrib/`
 * Creates default writable versions of `settings.php` and `services.yml`.
-* Creates `web/sites/default/files`-directory.
+* Creates `docroot/sites/default/files`-directory.
 * Latest version of drush is installed locally for use at `vendor/bin/drush`.
 * Latest version of DrupalConsole is installed locally for use at `vendor/bin/drupal`.
 * Creates environment variables based on your .env file. See [.env.example](.env.example).
