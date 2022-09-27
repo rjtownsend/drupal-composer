@@ -11,7 +11,7 @@ and installs several contrib modules I use on most projects.
 1. [install Git](https://github.com/git-guides/install-git)
 2. [Install Docker](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/)
 3. [Install DDEV](https://ddev.readthedocs.io/en/stable/)
-4. `git clone git@github.com:rjtownsend/drupal-composer.git`
+4. `git clone git@github.com:rjtownsend/drupal-ddev.git`
 5. cd into installation directory, run `ddev config`, and configure as follows:
     * Project name: must be lower case, no underscores, hyphens allowed. This will also be the 
 URL where the site is located; eg. my-project will be located at https://my-project.ddev.site
