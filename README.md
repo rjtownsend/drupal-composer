@@ -1,4 +1,4 @@
-# Composer template for Drupal + ddev
+# Composer template for Drupal + DDEV
 
 This project template provides a starter kit for managing your site
 dependencies with [Composer](https://getcomposer.org/). It is forked from the 
