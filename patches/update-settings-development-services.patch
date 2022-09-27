@@ -1,0 +1,35 @@
+diff --git a/core/assets/scaffold/files/default.settings.php b/core/assets/scaffold/files/default.settings.php
+index 5784a9c752..6335c2f52f 100644
+--- a/core/assets/scaffold/files/default.settings.php
++++ b/core/assets/scaffold/files/default.settings.php
+@@ -778,7 +778,11 @@
+  *
+  * Keep this code block at the end of this file to take full effect.
+  */
+-#
+-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+-#   include $app_root . '/' . $site_path . '/settings.local.php';
+-# }
++$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
++if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
++    require $ddev_settings;
++}
++if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
++  include $app_root . '/' . $site_path . '/settings.local.php';
++}
++$settings['config_sync_directory'] = '../config/sync';
+diff --git a/core/assets/scaffold/files/development.services.yml b/core/assets/scaffold/files/development.services.yml
+index d2857c66f8..0553016c17 100644
+--- a/core/assets/scaffold/files/development.services.yml
++++ b/core/assets/scaffold/files/development.services.yml
+@@ -4,6 +4,10 @@
+ # 'example.settings.local.php' file, which sits next to this file.
+ parameters:
+   http.response.debug_cacheability_headers: true
++  twig.config:
++    debug: true
++    auto_reload: true
++    cache: false
+ services:
+   cache.backend.null:
+     class: Drupal\Core\Cache\NullBackendFactory
