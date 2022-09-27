@@ -96,4 +96,17 @@ class ScriptHandler {
     }
   }
 
+  /**
+   * Remove the settings.php file and files directory added by ddev when ddev config is run
+   * Composer is used to manage these files. 
+   */
+  public static function deleteDdevSettings(Event $event) {
+    if (file_exists('docroot/sites/default/settings.php') && !file_exists('docroot/index.php')) {
+      unlink('docroot/sites/default/settings.php');
+      rmdir('docroot/sites/default/files/sync');
+      rmdir('docroot/sites/default/files');
+      $event->getIO()->write("Deleted the /sites/default/settings.php file installed by ddev");
+    }
+  }
+
 }
