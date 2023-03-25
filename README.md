@@ -15,9 +15,11 @@ and installs several contrib modules I use on most projects.
 5. cd into installation directory, run `ddev config`, and configure as follows:
     * Project name: must be lower case, no underscores, hyphens allowed. This will also be the 
 URL where the site is located; eg. my-project will be located at https://my-project.ddev.site
-    * Project root: `docroot`
-    * Project type: `drupal9`
+    * Project root: `docroot` (if ddev asks to create docroot, say yes)
+    * Project type: `drupal10`
 6. Run `ddev start` and then `ddev composer install`
+    * Read [here](https://ddev.com/blog/ddev-local-trusted-https-certificates/) if you receive 
+the warning message "mkcert may not be properly installed".
 
 ## Useful DDEV commands
 
